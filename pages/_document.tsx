@@ -1,24 +1,25 @@
-import createEmotionCache from 'lib/createEmotionCache'
-import theme, { openSans } from 'lib/theme'
+import createEmotionCache from '@/lib/createEmotionCache'
+import theme, { openSans } from '@/lib/theme'
 import createEmotionServer from '@emotion/server/create-instance'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
 
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" className={openSans.className}>
         <Head>
           <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/icon?family=Material+Icons"
           />
-          <meta name="theme-color" content={theme.palette.primary.main} />
-          <meta name="emotion-insertion-point" content="" />
+          <link rel="icon" type="image/svg+xml" href="/images/toyota.png" />
+          <meta name="theme-color" content={theme.palette.primary.main}/>
+          <meta name="emotion-insertion-point" content=""/>
           {(this.props as any).emotionStyleTags}
         </Head>
         <body>
-          <Main />
-          <NextScript />
+        <Main/>
+        <NextScript/>
         </body>
       </Html>
     )

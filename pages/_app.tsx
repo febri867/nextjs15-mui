@@ -2,21 +2,17 @@ import * as React from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Roboto } from 'next/font/google';
-import createEmotionCache from 'lib/createEmotionCache'
-import theme from 'lib/theme'
+import createEmotionCache from '@/lib/createEmotionCache'
+import { Provider as ReduxProvider } from 'react-redux';
+// import { PersistGate } from 'redux-persist/integration/react'
+import { store } from '../src/core/redux/store';
+import theme from '@/lib/theme'
+import { useStore } from 'react-redux'
 import {
     CacheProvider,
     EmotionCache,
     ThemeProvider as EmotionThemeProvider,
 } from '@emotion/react'
-
-const roboto = Roboto({
-    weight: ['300', '400', '500', '700'],
-    subsets: ['latin'],
-    display: 'swap',
-    variable: '--font-roboto',
-});
 
 interface CustomAppProps extends AppProps {
     emotionCache?: EmotionCache
@@ -28,8 +24,12 @@ export default function App({
     emotionCache = clientSideEmotionCache,
     pageProps,
 }: CustomAppProps) {
+    // const store = useStore()
+    const isServer = typeof window === 'undefined'
     return (
-        <CacheProvider value={emotionCache}>
+        <ReduxProvider store={store}>
+        {/*<PersistGate persistor={isServer ? store : store.__persistor} loading={null}>*/}
+        <CacheProvider value={emotionCache} >
             <Head>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <title>Workflow</title>
@@ -40,5 +40,7 @@ export default function App({
                 </EmotionThemeProvider>
             </ThemeProvider>
         </CacheProvider>
+            {/*</PersistGate>*/}
+        </ReduxProvider>
     );
 }

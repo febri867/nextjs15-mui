@@ -1,16 +1,11 @@
-import Layout from "src/shared/components/layout";
-import Toolbar from "@mui/material/Toolbar";
+import Layout from "@/src/shared/components/layout";
 import {Box} from "@mui/material";
+import Dashboard from "@/src/modules/home/presentation/interface";
 
 export default function HomePage() {
     return (
-        // <Layout sidebarProps={{ activeRoute: 'On Hand Adjustment Management' }}>
-       <Box>
-           {/*<Toolbar/>*/}
-           <Box>
-               APPROVAL SYSTEM
-           </Box>
-
-       </Box>
+        <Layout sidebarProps={{ activeRoute: 'Dashboard' }}>
+            <Dashboard/>
+        </Layout>
     );
 }
